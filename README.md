@@ -1,6 +1,10 @@
 # 🛒 Evara - 全栈电商平台
 
 一个功能完整的现代电商平台，基于 Next.js 14 全栈开发。
+<img width="1905" height="1077" alt="image" src="https://github.com/user-attachments/assets/0b5c8325-ef8f-4d63-ab80-e8ae247dc117" />
+<img width="1911" height="1034" alt="image" src="https://github.com/user-attachments/assets/141a4241-ea8a-4013-8be8-7b639b7115d1" />
+
+<img width="1911" height="1034" alt="image" src="https://github.com/user-attachments/assets/4e9a73aa-5d7b-4670-8ef9-96f5097425d0" />
 
 ## ✨ 功能特性
 
