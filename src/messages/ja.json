@@ -1,0 +1,5 @@
+{
+  "nav": { "home": "ホーム", "deals": "セール", "cart": "カート", "account": "アカウント", "orders": "注文", "search": "検索" },
+  "common": { "save": "保存", "cancel": "キャンセル", "delete": "削除", "edit": "編集", "submit": "送信", "loading": "読み込み中...", "back": "戻る" },
+  "footer": { "about": "会社概要", "careers": "採用情報", "privacy": "プライバシーポリシー", "terms": "利用規約", "help": "ヘルプ", "contact": "お問い合わせ" }
+}

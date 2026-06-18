@@ -1,0 +1,51 @@
+{
+  "header": {
+    "home": "Home",
+    "cart": "Cart",
+    "orders": "Returns & Orders",
+    "account": "Account & Lists",
+    "search": "Search Evara",
+    "sign_in": "Sign in",
+    "sign_out": "Sign out",
+    "deliver_to": "Deliver to",
+    "hello": "Hello, {name}",
+    "all": "All",
+    "view_cart": "View Cart",
+    "shopping_cart": "Shopping Cart",
+    "items": "{count} items",
+    "more_items": "+{count} more items",
+    "empty_cart": "Your cart is empty"
+  },
+  "footer": {
+    "back_to_top": "Back to top",
+    "careers": "Careers",
+    "about": "About Us",
+    "terms": "Terms of Use",
+    "privacy": "Privacy Policy",
+    "help": "Help",
+    "copyright": "© 2024 Evara. All rights reserved."
+  },
+  "product": {
+    "add_to_cart": "Add to Cart",
+    "buy_now": "Buy Now",
+    "reviews": "Reviews",
+    "in_stock": "In Stock",
+    "out_of_stock": "Out of Stock",
+    "subscribe_save": "Subscribe & Save"
+  },
+  "cart": {
+    "your_cart": "Your Cart",
+    "subtotal": "Subtotal",
+    "checkout": "Proceed to Checkout",
+    "empty_cart": "Your cart is empty",
+    "remove": "Remove",
+    "quantity": "Quantity"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back"
+  }
+}

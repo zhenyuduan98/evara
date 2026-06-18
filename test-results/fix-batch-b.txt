@@ -1,0 +1,56 @@
+Fix Batch B - Core API Endpoint Fixes
+======================================
+Date: 2026-04-20
+
+6 failing endpoints fixed. All were returning HTTP 500 Internal Server Error.
+
+## Root Causes & Fixes
+
+### 1. POST /api/checkout (src/app/api/checkout/route.ts)
+- BUG 1: `req.json()` throws when no body/invalid JSON → caught by outer try/catch → 500
+- BUG 2: `parsedBody.error.errors[0].message` - Zod v4 uses `.issues` not `.errors`, causing TypeError → 500
+- FIX: Added inner try/catch for `req.json()` returning 400. Changed `.errors[0]` to `.issues?.[0]?.message || .message`
+- VERIFIED: No body → 400 "Invalid or missing request body"; Empty {} → 400 "Invalid input: expected string..."; Valid body → proper auth/validation flow
+
+### 2. POST /api/notifications (src/app/api/notifications/route.ts)
+- BUG: No try/catch around `req.json()` or prisma calls. Missing body or missing required fields (type/title/body) → unhandled exception → 500
+- FIX: Added outer try/catch, inner try/catch for JSON parsing, validation for required fields (type, title, body)
+- VERIFIED: With auth + valid body → 201 with notification created
+
+### 3. POST /api/products/[id]/reviews (src/app/api/products/[id]/reviews/route.ts)
+- BUG 1: No try/catch wrapper → any prisma error (e.g., nonexistent product FK violation) → 500
+- BUG 2: `parsed.error.errors[0].message` - same Zod `.errors` vs `.issues` bug
+- FIX: Added try/catch, product existence check (404), fixed Zod error access
+- VERIFIED: Nonexistent product → 404 "Product not found"
+
+### 4. POST /api/reviews/[id]/helpful (src/app/api/reviews/[id]/helpful/route.ts)
+- BUG: No try/catch. Nonexistent review ID → prisma update fails on FK constraint → 500
+- FIX: Added try/catch, review existence check (404)
+- VERIFIED: Nonexistent review → 404 "Review not found"
+
+### 5. POST /api/reviews/[id]/vote (src/app/api/reviews/[id]/vote/route.ts)
+- BUG: No try/catch. `req.json()` throws with no body. Nonexistent review → prisma upsert FK error → 500
+- FIX: Added try/catch, inner JSON parse try/catch, review existence check (404)
+- VERIFIED: Nonexistent review → 404 "Review not found"
+
+### 6. POST /api/wishlist (src/app/api/wishlist/route.ts)
+- BUG: No try/catch. `request.json()` throws with no body. Nonexistent productId → prisma upsert FK error → 500
+- FIX: Added try/catch, inner JSON parse try/catch, product existence check (404)
+- VERIFIED: Valid product → 200; Nonexistent product → 404 "Product not found"
+
+## Files Modified
+- src/app/api/checkout/route.ts
+- src/app/api/notifications/route.ts
+- src/app/api/products/[id]/reviews/route.ts
+- src/app/api/reviews/[id]/helpful/route.ts
+- src/app/api/reviews/[id]/vote/route.ts
+- src/app/api/wishlist/route.ts
+
+## Common Patterns Applied
+1. Wrapped all handlers in try/catch returning 500 on unexpected errors
+2. Added inner try/catch for `req.json()` returning 400 for invalid/missing body
+3. Added existence checks for referenced records (products, reviews) returning 404
+4. Fixed Zod error access: `.errors[0]` → `.issues?.[0]?.message` (Zod v4 compatibility)
+5. Added required field validation returning 400 for missing fields
+
+All 6 endpoints now return proper HTTP status codes (400/401/404) instead of 500.

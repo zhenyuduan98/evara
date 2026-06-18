@@ -1,0 +1,569 @@
+[
+  {
+    "endpoint": "/api/analytics/events",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/announcements/active",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/answers/test-id/vote",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/auctions",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/auctions/test-id",
+    "method": "GET",
+    "statusCode": 404,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/auctions/test-id/bid",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/auth/register",
+    "method": "POST",
+    "statusCode": 201,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/auth/forgot-password",
+    "method": "POST",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/auth/reset-password",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/auth/verify-2fa",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/auth/verify-email",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/behaviors",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/brands/test-brand",
+    "method": "GET",
+    "statusCode": 404,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/browsing-history",
+    "method": "GET",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/business/account",
+    "method": "GET",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/business/register",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/business/purchase-orders",
+    "method": "GET",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/business/purchase-orders",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/buyer-showcase",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/campaigns/active",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/captcha",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/cart",
+    "method": "GET",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/cart",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/cart/save-for-later",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/categories",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/chat/start",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/chat/send",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/checkout",
+    "method": "POST",
+    "statusCode": 500,
+    "pass": false,
+    "error": "Internal server error"
+  },
+  {
+    "endpoint": "/api/checkout/confirm",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/checkout/installments",
+    "method": "POST",
+    "statusCode": 405,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/content-blocks",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/coupons/available",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/coupons/suggest",
+    "method": "POST",
+    "statusCode": 405,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/coupons/validate",
+    "method": "POST",
+    "statusCode": 404,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/deals",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/deals/test-id/notify",
+    "method": "POST",
+    "statusCode": 404,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/experiments/assignment?experimentId=test",
+    "method": "GET",
+    "statusCode": 400,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/external/v1",
+    "method": "GET",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/gift-cards/redeem",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/gift-registry",
+    "method": "GET",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/gift-registry",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/gift-registry/test-id",
+    "method": "GET",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/gift-registry/search",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/gift-registry/share/test-code",
+    "method": "GET",
+    "statusCode": 404,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/graphql",
+    "method": "POST",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/guest/cart",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/guest/cart",
+    "method": "POST",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/guest/checkout",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/health",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/help",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/help/articles",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/help/categories",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/inventory/hold",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/inventory/hold/test-id",
+    "method": "DELETE",
+    "statusCode": 404,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/live/streams",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/live/streams",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/live/streams/test-id",
+    "method": "GET",
+    "statusCode": 404,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/live/streams/test-id/start",
+    "method": "POST",
+    "statusCode": 405,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/live/streams/test-id/end",
+    "method": "POST",
+    "statusCode": 405,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/live/streams/test-id/comments",
+    "method": "GET",
+    "statusCode": 405,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/live/streams/test-id/comments",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/live/streams/test-id/products",
+    "method": "GET",
+    "statusCode": 405,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/live/streams/test-id/products",
+    "method": "POST",
+    "statusCode": 500,
+    "pass": false,
+    "error": "Failed to add product"
+  },
+  {
+    "endpoint": "/api/loyalty/balance",
+    "method": "GET",
+    "statusCode": 400,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/loyalty/redeem",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/loyalty/tier",
+    "method": "GET",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/membership",
+    "method": "GET",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/membership/subscribe",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/analytics",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/analytics/cohorts",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/analytics/export",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/analytics/funnel",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/analytics/search",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/announcements",
+    "method": "GET",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/announcements",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/campaigns",
+    "method": "GET",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/coupons",
+    "method": "GET",
+    "statusCode": 403,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/experiments",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/inventory",
+    "method": "GET",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/inventory/bulk",
+    "method": "POST",
+    "statusCode": 401,
+    "pass": true,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/system/health",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": ""
+  }
+]

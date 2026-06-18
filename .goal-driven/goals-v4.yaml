@@ -1,0 +1,192 @@
+## GDD V4 — Advanced Features & Intelligence
+## 12 goals, 4 batches × 3 parallel subagents
+## Focus: Recommendation, Subscriptions, i18n, Live, Testing
+
+batches:
+  batch_1_intelligence:
+    parallel: true
+    goals:
+      G1_recommendation_engine:
+        title: "推荐引擎 - 协同过滤/个性化/复购"
+        tasks:
+          - Create UserBehavior model (userId, productId, action: VIEW/CART/PURCHASE/WISHLIST, createdAt)
+          - Track user behaviors on product view, add-to-cart, purchase
+          - GET /api/recommendations/similar/[productId] - "买了这个的人也买了" (item-based collaborative filtering)
+          - GET /api/recommendations/personal - personalized feed based on user history
+          - GET /api/recommendations/buy-again - products user has purchased before
+          - GET /api/recommendations/trending - trending products (most viewed/purchased in 7 days)
+          - Add recommendation sections to homepage and product detail page
+          - Create RecommendationCard component
+        criteria: "Similar products shown on product page; personalized homepage; buy-again list works"
+
+      G2_subscribe_save:
+        title: "Subscribe & Save 定期购"
+        tasks:
+          - Create Subscription model (userId, productId, frequency: WEEKLY/BIWEEKLY/MONTHLY/BIMONTHLY, quantity, discount Decimal, nextDelivery DateTime, status: ACTIVE/PAUSED/CANCELLED)
+          - Create SubscriptionOrder model (subscriptionId, orderId, scheduledDate, processedAt?)
+          - POST /api/subscriptions - create subscription with frequency and discount
+          - GET /api/subscriptions - list user's active subscriptions
+          - PATCH /api/subscriptions/[id] - update frequency/quantity/pause/cancel
+          - POST /api/subscriptions/process - cron endpoint to process due subscriptions (create orders)
+          - Add "Subscribe & Save" option on product detail page (5% for 1 item, 10% for 3+, 15% for 5+)
+          - Create /account/subscriptions management page
+        criteria: "Users can subscribe to products; subscriptions create orders on schedule; discount tiers work"
+
+      G3_graphql:
+        title: "GraphQL API层"
+        tasks:
+          - Install @apollo/server @as-integrations/next graphql
+          - Create src/lib/graphql/schema.ts - type definitions (Product, User, Order, Cart, Review)
+          - Create src/lib/graphql/resolvers/ - resolvers for each type
+          - Create /api/graphql route handler
+          - Support queries: products, product(slug), cart, orders, recommendations
+          - Support mutations: addToCart, removeFromCart, createOrder, createReview
+          - Add GraphQL playground in dev mode
+        criteria: "GraphQL endpoint works; can query products and mutations for cart; playground accessible"
+
+  batch_2_i18n_realtime:
+    parallel: true
+    goals:
+      G4_i18n:
+        title: "国际化 i18n + 多币种"
+        tasks:
+          - Install next-intl
+          - Configure middleware for locale detection (en, zh, ja, es, fr)
+          - Create messages/ directory with translation JSON files
+          - Translate key UI: header, footer, product card, cart, checkout, auth pages
+          - Currency selector component (USD, CNY, JPY, EUR, GBP)
+          - Create src/lib/currency.ts - exchange rate API (mock rates) + format helper
+          - Store user locale/currency preference in DB or cookie
+          - Update product prices to show in selected currency
+        criteria: "Site switchable between 5 languages; prices show in selected currency; preference persisted"
+
+      G5_websocket_realtime:
+        title: "WebSocket实时通信 + 拍卖"
+        tasks:
+          - Install socket.io socket.io-client
+          - Create src/lib/socket-server.ts - Socket.IO server setup
+          - Create /api/socket route to initialize Socket.IO
+          - Real-time order status updates (push to buyer when status changes)
+          - Real-time chat upgrade (replace SSE with Socket.IO for support chat)
+          - Create Auction model (productId, startPrice, currentBid, bidderId, endsAt, status)
+          - POST /api/auctions - create auction
+          - POST /api/auctions/[id]/bid - place bid (broadcasts via WebSocket)
+          - GET /api/auctions - list active auctions
+          - Create /auctions page with live bidding UI
+        criteria: "WebSocket connects; order updates push in real-time; auction bids broadcast live"
+
+      G6_gift_registry:
+        title: "礼物清单 + 心愿单增强"
+        tasks:
+          - Create GiftRegistry model (userId, name, eventType: WEDDING/BIRTHDAY/BABY_SHOWER/HOLIDAY/OTHER, eventDate, isPublic, shareCode String @unique)
+          - Create GiftRegistryItem model (registryId, productId, quantity, purchasedQuantity default 0, priority)
+          - CRUD /api/gift-registry - create/list/update/delete registries
+          - POST /api/gift-registry/[id]/items - add item to registry
+          - GET /api/gift-registry/share/[code] - public view of registry
+          - POST /api/gift-registry/share/[code]/purchase/[itemId] - buy gift from registry
+          - Create /gift-registry page (my registries)
+          - Create /gift-registry/[code] public page (shared view with buy buttons)
+          - Search registries by name or event type
+        criteria: "Users create registries; share via link; others can purchase gifts; purchased count updates"
+
+  batch_3_live_b2b:
+    parallel: true
+    goals:
+      G7_live_shopping:
+        title: "直播带货 - 实时流/弹幕/一键下单"
+        tasks:
+          - Create LiveStream model (sellerId, title, description, status: SCHEDULED/LIVE/ENDED, scheduledAt, startedAt?, endedAt?, viewerCount default 0, thumbnailUrl?)
+          - Create LiveProduct model (streamId, productId, displayOrder, specialPrice?, isActive default false)
+          - Create LiveComment model (streamId, userId, content, createdAt)
+          - POST /api/live/streams - create/schedule stream (seller)
+          - PATCH /api/live/streams/[id]/start - go live
+          - PATCH /api/live/streams/[id]/end - end stream
+          - POST /api/live/streams/[id]/products - pin product during stream
+          - GET /api/live/streams - list active/upcoming streams
+          - GET /api/live/streams/[id] - stream detail with products and comments
+          - POST /api/live/streams/[id]/comment - send comment (stored + broadcast)
+          - Create /live page (stream listing)
+          - Create /live/[id] page (viewer: video placeholder + chat + product cards + buy button)
+          - Create /seller/dashboard/live page (manage streams)
+        criteria: "Sellers schedule/start streams; viewers see products+chat; can buy from stream"
+
+      G8_b2b_business:
+        title: "Amazon Business B2B采购"
+        tasks:
+          - Create BusinessAccount model (userId, companyName, taxId, isVerified, creditLimit Decimal?)
+          - Create PurchaseOrder model (businessAccountId, items Json, status: PENDING_APPROVAL/APPROVED/REJECTED/ORDERED, approvedBy?, totalAmount)
+          - Create BulkDiscount model (productId, minQuantity Int, discountPercent Decimal)
+          - POST /api/business/register - register business account
+          - GET /api/business/account - business account details
+          - CRUD /api/business/purchase-orders - create/approve/reject POs
+          - GET /api/products/[id]/bulk-pricing - show bulk discount tiers
+          - Invoice generation for business orders (tax-compliant format)
+          - Create /business page (B2B landing)
+          - Create /business/orders page (PO management with approval workflow)
+        criteria: "Business accounts register; POs go through approval; bulk discounts apply"
+
+      G9_vine_reviews:
+        title: "Amazon Vine + 高级评测系统"
+        tasks:
+          - Create VineReviewer model (userId, tier: STANDARD/VINE_VOICE, invitedAt, totalReviews Int, helpfulPercent Decimal)
+          - Create VineProduct model (productId, sellerId, samplesAvailable Int, samplesClaimed Int)
+          - POST /api/admin/vine/invite - invite reviewer to Vine program
+          - POST /api/vine/products - seller offers product for Vine review
+          - POST /api/vine/claim/[productId] - Vine reviewer claims free sample
+          - GET /api/vine/available - list available Vine products
+          - Add "Vine Voice" badge to reviews from Vine reviewers
+          - Add verified purchase badge to reviews
+          - Review media gallery (photos grouped from all reviews)
+          - Create /vine page (Vine program info + available products)
+        criteria: "Vine reviewers get badge; sellers offer samples; verified purchase shown"
+
+  batch_4_testing_polish:
+    parallel: true
+    goals:
+      G10_e2e_tests:
+        title: "E2E测试 (Playwright)"
+        tasks:
+          - Install @playwright/test and browsers
+          - Create playwright.config.ts
+          - Write E2E tests for critical flows:
+            * User registration + login
+            * Product search + browse
+            * Add to cart + checkout
+            * Order history view
+            * Seller product management
+            * Admin dashboard access
+          - Create tests/e2e/ directory
+          - At least 15 test cases covering happy paths
+          - Add npm script "test:e2e"
+        criteria: "Playwright installed; 15+ E2E tests; critical user flows covered"
+
+      G11_image_search:
+        title: "图片搜索 + 条形码搜索"
+        tasks:
+          - Create /api/search/image - accept uploaded image, extract dominant colors/features, find similar products by color/category
+          - Create /api/search/barcode - accept barcode string, lookup product by SKU/UPC
+          - Add Barcode model (productId, type: UPC/EAN/ISBN, code String @unique)
+          - Create ImageSearchButton component (upload photo → search)
+          - Create BarcodeSearchButton component (input barcode → search)
+          - Add both to search bar area
+          - Simple image similarity: use product image dominant color extraction + category matching
+        criteria: "Image upload returns similar products; barcode lookup finds product"
+
+      G12_performance:
+        title: "性能优化 + 监控面板"
+        tasks:
+          - Create /api/admin/system/health - comprehensive health (DB, Redis, Meilisearch, disk, memory)
+          - Create /api/admin/system/metrics - request counts, response times, error rates (in-memory counters)
+          - Create performance middleware tracking response times
+          - Create /admin/system page with system health dashboard
+          - Add Redis caching to more endpoints (categories, deals, seller storefront)
+          - Database query optimization: add missing indexes
+          - Bundle size analysis: create /api/admin/system/bundle-info
+          - Rate limiting dashboard showing blocked IPs
+        criteria: "Health dashboard shows all services; response time tracking works; critical queries have indexes"
+
+summary:
+  total_goals: 12
+  total_batches: 4
+  new_features: "Recommendations, Subscribe&Save, GraphQL, i18n, WebSocket, Auctions, Live Shopping, B2B, Vine, E2E Tests, Image Search, Performance"
+  strategy: "Intelligence first → i18n+realtime → business features → testing+polish"

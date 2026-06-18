@@ -1,0 +1,5 @@
+{
+  "nav": { "home": "Inicio", "deals": "Ofertas", "cart": "Carrito", "account": "Cuenta", "orders": "Pedidos", "search": "Buscar" },
+  "common": { "save": "Guardar", "cancel": "Cancelar", "delete": "Eliminar", "edit": "Editar", "submit": "Enviar", "loading": "Cargando...", "back": "Volver" },
+  "footer": { "about": "Sobre Nosotros", "careers": "Empleo", "privacy": "Política de Privacidad", "terms": "Términos de Servicio", "help": "Ayuda", "contact": "Contáctenos" }
+}

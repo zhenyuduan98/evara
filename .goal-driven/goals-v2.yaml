@@ -1,0 +1,181 @@
+project:
+  name: "Amazon Clone V2 - Full Feature Implementation"
+  tech_stack:
+    frontend: "Next.js 14 App Router + TypeScript + TailwindCSS"
+    backend: "Next.js API Routes + Prisma ORM"
+    database: "PostgreSQL"
+    auth: "NextAuth.js"
+    payment: "Stripe"
+
+# ============================================================
+# BATCH A: User + Finance + Platform foundations (3 parallel)
+# ============================================================
+goals:
+  - id: "A1"
+    title: "用户域增强 - MFA/密码重置/邮箱验证"
+    domain: "👤 用户域"
+    criteria:
+      - "POST /api/auth/forgot-password sends reset email"
+      - "POST /api/auth/reset-password resets with token"
+      - "POST /api/auth/verify-email verifies email token"
+      - "GET /auth/forgot-password page renders"
+      - "GET /auth/reset-password page renders"
+      - "POST /api/account/enable-2fa returns QR code URI"
+      - "POST /api/account/verify-2fa validates TOTP code"
+      - "Account deletion API at DELETE /api/account"
+      - "Login activity log at GET /api/account/sessions"
+      - "npm run build succeeds"
+
+  - id: "A2"
+    title: "财务域 - 自动退款/税务/卖家打款"
+    domain: "💰 财务域"
+    criteria:
+      - "POST /api/admin/refunds/[id]/process triggers Stripe refund"
+      - "GET /api/tax/calculate returns tax by state/country"
+      - "POST /api/admin/sellers/[id]/payout creates payout record"
+      - "GET /api/seller/financial-reports returns monthly summary"
+      - "GET /api/seller/statements returns transaction statements"
+      - "Invoice PDF generation at GET /api/orders/[id]/invoice?format=pdf"
+      - "Tax model added to Prisma schema"
+      - "PayoutBatch model added to Prisma schema"
+      - "Admin payout management page renders"
+      - "npm run build succeeds"
+
+  - id: "A3"
+    title: "平台基础域 - i18n/Feature Flags/Health/Logging"
+    domain: "🌐 平台基础域"
+    criteria:
+      - "next-intl configured with en/zh/es/ja locales"
+      - "GET /api/health returns service status JSON"
+      - "FeatureFlag model in Prisma, GET /api/admin/feature-flags CRUD"
+      - "Admin feature flags management page renders"
+      - "Structured logging utility at src/lib/logger.ts"
+      - "API middleware logs request/response times"
+      - "File upload API at POST /api/upload using local storage"
+      - "Error boundary component wraps app"
+      - "npm run build succeeds"
+
+# ============================================================
+# BATCH B: Fulfillment + Seller + Customer Service (3 parallel)
+# ============================================================
+  - id: "B1"
+    title: "履约域 - WMS工作流/运力/逆向物流"
+    domain: "📦 履约域"
+    dependencies: ["A2"]
+    criteria:
+      - "POST /api/admin/warehouses/[id]/pick-list generates pick list"
+      - "POST /api/admin/shipments/[id]/pack marks as packed"
+      - "POST /api/admin/shipments/[id]/ship marks as shipped with tracking"
+      - "Carrier rate comparison at POST /api/shipping/rates"
+      - "Return label generation at POST /api/returns/[id]/label"
+      - "Reverse logistics status flow: REQUESTED→APPROVED→SHIPPED→RECEIVED→PROCESSED"
+      - "Admin fulfillment dashboard page renders"
+      - "Delivery time estimation at GET /api/shipping/estimate"
+      - "npm run build succeeds"
+
+  - id: "B2"
+    title: "商家域增强 - 分析/消息/绩效"
+    domain: "🏪 商家域"
+    dependencies: ["A1"]
+    criteria:
+      - "GET /api/seller/analytics returns sales trends, traffic, conversion"
+      - "POST /api/seller/messages sends buyer-seller message"
+      - "GET /api/seller/messages lists conversations"
+      - "Seller health dashboard at GET /seller/performance"
+      - "SellerMessage model in Prisma schema"
+      - "Seller performance metrics API at GET /api/seller/performance"
+      - "Account suspension appeal at POST /api/seller/appeal"
+      - "Seller ad management at GET /seller/advertising"
+      - "npm run build succeeds"
+
+  - id: "B3"
+    title: "客服域增强 - 实时聊天/工单路由/知识库搜索"
+    domain: "💬 客服域"
+    dependencies: ["A3"]
+    criteria:
+      - "SSE-based live chat at GET /api/chat/stream"
+      - "POST /api/chat/send sends message in chat session"
+      - "ChatSession and ChatMessage models in Prisma"
+      - "Auto-reply bot for common questions"
+      - "Ticket assignment API at POST /api/admin/tickets/[id]/assign"
+      - "SLA tracking fields on Ticket model"
+      - "Help article search with full-text at GET /api/help?q=..."
+      - "CSAT survey at POST /api/tickets/[id]/feedback"
+      - "npm run build succeeds"
+
+# ============================================================
+# BATCH C: Product + Transaction + Marketing (3 parallel)
+# ============================================================
+  - id: "C1"
+    title: "商品域增强 - SPU/SKU/库存/评价审核"
+    domain: "🛍️ 商品域"
+    dependencies: ["B2"]
+    criteria:
+      - "Product model has proper SPU fields, variants as SKUs"
+      - "Review moderation API at POST /api/admin/reviews/[id]/moderate"
+      - "Review flagging at POST /api/reviews/[id]/flag"
+      - "Product comparison at GET /products/compare?ids=..."
+      - "Brand page at GET /brand/[slug]"
+      - "Bulk inventory update at POST /api/admin/inventory/bulk"
+      - "Product import/export CSV at POST/GET /api/seller/products/import"
+      - "npm run build succeeds"
+
+  - id: "C2"
+    title: "交易域增强 - 多支付/拆单/再购买"
+    domain: "🛒 交易域"
+    dependencies: ["A2"]
+    criteria:
+      - "Gift card model and redemption at POST /api/gift-cards/redeem"
+      - "Wallet/balance system at GET /api/wallet"
+      - "Order splitting by seller at checkout"
+      - "Buy Again button on order history page"
+      - "Guest checkout flow (cart without login, login at checkout)"
+      - "Save payment method at POST /api/payment-methods"
+      - "Order modification before shipping at PUT /api/orders/[id]"
+      - "npm run build succeeds"
+
+  - id: "C3"
+    title: "营销域增强 - 广告引擎/闪购/推荐"
+    domain: "📣 营销域"
+    dependencies: ["B2"]
+    criteria:
+      - "Ad bidding engine at POST /api/ads/bid"
+      - "Ad impression/click tracking at POST /api/ads/track"
+      - "Seller ad dashboard at GET /seller/advertising/campaigns"
+      - "Flash sale with real-time countdown and inventory display"
+      - "Referral program at POST /api/referrals/invite"
+      - "Loyalty points system: earn on purchase, redeem at checkout"
+      - "ReferralCode and LoyaltyPoints models in Prisma"
+      - "npm run build succeeds"
+
+# ============================================================
+# BATCH D: Data Intelligence + Communications (2 parallel)
+# ============================================================
+  - id: "D1"
+    title: "数据智能域 - BI/行为追踪/A-B测试/风控"
+    domain: "📊 数据智能域"
+    dependencies: ["A3"]
+    criteria:
+      - "Event tracking API at POST /api/analytics/events"
+      - "AnalyticsEvent model in Prisma"
+      - "Admin BI dashboard at GET /admin/analytics with charts"
+      - "Conversion funnel API at GET /api/admin/analytics/funnel"
+      - "A/B test framework: Experiment model, variant assignment"
+      - "Fraud detection scoring on orders at POST /api/orders with risk_score"
+      - "Anti-scraping middleware with CAPTCHA trigger"
+      - "Search analytics at GET /api/admin/analytics/search"
+      - "npm run build succeeds"
+
+  - id: "D2"
+    title: "通信域增强 - 实时通知/推送/模板管理"
+    domain: "🔔 通信域"
+    dependencies: ["A3"]
+    criteria:
+      - "SSE-based real-time notifications at GET /api/notifications/stream"
+      - "Notification preferences granular control API"
+      - "Admin notification template CRUD at /api/admin/notification-templates"
+      - "Admin template management page renders"
+      - "Browser push notification subscription at POST /api/notifications/subscribe"
+      - "Notification categories (order, promo, system) with filtering"
+      - "NotificationTemplate model in Prisma"
+      - "npm run build succeeds"

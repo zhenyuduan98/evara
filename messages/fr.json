@@ -1,0 +1,51 @@
+{
+  "header": {
+    "home": "Accueil",
+    "cart": "Panier",
+    "orders": "Retours et Commandes",
+    "account": "Compte et Listes",
+    "search": "Rechercher sur Evara",
+    "sign_in": "Se connecter",
+    "sign_out": "Se déconnecter",
+    "deliver_to": "Livrer à",
+    "hello": "Bonjour, {name}",
+    "all": "Tout",
+    "view_cart": "Voir le Panier",
+    "shopping_cart": "Panier d'Achat",
+    "items": "{count} articles",
+    "more_items": "+{count} articles supplémentaires",
+    "empty_cart": "Votre panier est vide"
+  },
+  "footer": {
+    "back_to_top": "Retour en haut",
+    "careers": "Carrières",
+    "about": "À propos",
+    "terms": "Conditions d'utilisation",
+    "privacy": "Politique de confidentialité",
+    "help": "Aide",
+    "copyright": "© 2024 Evara. Tous droits réservés."
+  },
+  "product": {
+    "add_to_cart": "Ajouter au Panier",
+    "buy_now": "Acheter Maintenant",
+    "reviews": "Avis",
+    "in_stock": "En Stock",
+    "out_of_stock": "Rupture de Stock",
+    "subscribe_save": "S'abonner et Économiser"
+  },
+  "cart": {
+    "your_cart": "Votre Panier",
+    "subtotal": "Sous-total",
+    "checkout": "Passer la Commande",
+    "empty_cart": "Votre panier est vide",
+    "remove": "Supprimer",
+    "quantity": "Quantité"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "back": "Retour"
+  }
+}

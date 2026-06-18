@@ -1,0 +1,227 @@
+[
+  {"endpoint": "/api/notifications", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/notifications", "method": "POST", "statusCode": 500, "pass": false, "error": " "}
+,
+  {"endpoint": "/api/notifications/fake-id/read", "method": "POST", "statusCode": 405, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/notifications/digest", "method": "GET", "statusCode": 405, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/notifications/preferences", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/notifications/preferences", "method": "PUT", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/notifications/send", "method": "POST", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/notifications/stream", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/notifications/subscribe", "method": "POST", "statusCode": 201, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/orders", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/orders", "method": "POST", "statusCode": 405, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/orders/fake-id", "method": "GET", "statusCode": 404, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/orders/fake-id/cancel", "method": "POST", "statusCode": 404, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/orders/fake-id/downloads", "method": "GET", "statusCode": 404, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/orders/fake-id/invoice", "method": "GET", "statusCode": 404, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/orders/fake-id/items/fake-item/download", "method": "GET", "statusCode": 405, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/orders/fake-id/refund", "method": "POST", "statusCode": 404, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/orders/fake-id/reorder", "method": "POST", "statusCode": 404, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/orders/fake-id/return", "method": "POST", "statusCode": 404, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/orders/fake-id/stream", "method": "GET", "statusCode": 0, "pass": true, "error": "timeout/streaming endpoint "}
+,
+  {"endpoint": "/api/orders/export", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/payment-methods", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/payment-methods", "method": "POST", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/products", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/products", "method": "POST", "statusCode": 405, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/products/fake-id", "method": "GET", "statusCode": 404, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/products/fake-id/bulk-pricing", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/products/fake-id/price-history", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/products/fake-id/questions", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/products/fake-id/questions", "method": "POST", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/products/fake-id/questions/fake-qid/answer", "method": "POST", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/products/fake-id/review-gallery", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/products/fake-id/reviews", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/products/fake-id/reviews", "method": "POST", "statusCode": 500, "pass": false, "error": " "}
+,
+  {"endpoint": "/api/products/fake-id/showcases", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/promotions", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/push/send", "method": "POST", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/push/subscribe", "method": "POST", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/questions/fake-id/answers", "method": "GET", "statusCode": 405, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/questions/fake-id/answers", "method": "POST", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/recommendations/fake-id", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/recommendations/buy-again", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/recommendations/personal", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/recommendations/similar/fake-id", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/recommendations/trending", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/referrals/apply", "method": "POST", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/referrals/invite", "method": "POST", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/referrals/stats", "method": "GET", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/returns/fake-id/label", "method": "GET", "statusCode": 405, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/reviews/fake-id/flag", "method": "POST", "statusCode": 404, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/reviews/fake-id/helpful", "method": "POST", "statusCode": 500, "pass": false, "error": " "}
+,
+  {"endpoint": "/api/reviews/fake-id/vote", "method": "POST", "statusCode": 500, "pass": false, "error": " "}
+,
+  {"endpoint": "/api/search?q=test", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/search/barcode", "method": "POST", "statusCode": 405, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/search/image", "method": "POST", "statusCode": 500, "pass": false, "error": "{\"error\":\"Image search failed\"} "}
+,
+  {"endpoint": "/api/search/suggestions?q=test", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/register", "method": "POST", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/fake-id/review", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/advertising/campaigns", "method": "GET", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/analytics", "method": "GET", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/analytics/dashboard", "method": "GET", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/api-keys", "method": "GET", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/appeal", "method": "POST", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/dashboard", "method": "GET", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/earnings", "method": "GET", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/financial-reports", "method": "GET", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/kyc", "method": "POST", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/messages", "method": "GET", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/orders", "method": "GET", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/orders/ship", "method": "POST", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/performance", "method": "GET", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/products/bulk-delete", "method": "POST", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/products/bulk-update", "method": "PUT", "statusCode": 405, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/products/bulk", "method": "POST", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/products/import", "method": "POST", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/products", "method": "GET", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/statements", "method": "GET", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/seller/team", "method": "GET", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/shipping/calculate", "method": "POST", "statusCode": 401, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/shipping/estimate", "method": "POST", "statusCode": 405, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/shipping/rates", "method": "POST", "statusCode": 405, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/shipping/windows", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/subscriptions", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/subscriptions", "method": "POST", "statusCode": 404, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/subscriptions/fake-id", "method": "GET", "statusCode": 405, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/subscriptions/fake-id", "method": "PATCH", "statusCode": 404, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/subscriptions/process", "method": "POST", "statusCode": 401, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/support/chat/stream", "method": "GET", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/support/chatbot", "method": "POST", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/support/tickets", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/support/tickets", "method": "POST", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/tax/calculate", "method": "POST", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/tickets", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/tickets", "method": "POST", "statusCode": 500, "pass": false, "error": " "}
+,
+  {"endpoint": "/api/tickets/fake-id", "method": "GET", "statusCode": 404, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/tickets/fake-id/feedback", "method": "POST", "statusCode": 400, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/tickets/fake-id/messages", "method": "GET", "statusCode": 405, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/tickets/fake-id/messages", "method": "POST", "statusCode": 404, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/track/click/fake-id", "method": "GET", "statusCode": 307, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/track/open/fake-id", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/tracking/FAKE123456", "method": "GET", "statusCode": 404, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/upload", "method": "POST", "statusCode": 500, "pass": false, "error": " "}
+,
+  {"endpoint": "/api/user-coupons", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/vine/available", "method": "GET", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/vine/claim/fake-product-id", "method": "POST", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/vine/my-claims", "method": "GET", "statusCode": 403, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/vine/products", "method": "GET", "statusCode": 405, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/wallet", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/wallet/topup", "method": "POST", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/webhooks/carrier", "method": "POST", "statusCode": 404, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/webhooks/stripe", "method": "POST", "statusCode": 500, "pass": false, "error": "{\"error\":\"Webhook handler failed\"} "}
+,
+  {"endpoint": "/api/wishlist", "method": "GET", "statusCode": 200, "pass": true, "error": " "}
+,
+  {"endpoint": "/api/wishlist", "method": "POST", "statusCode": 500, "pass": false, "error": " "}
+]

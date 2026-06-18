@@ -1,0 +1,35 @@
+Fix Batch C - API Endpoint Fixes Summary
+=========================================
+Date: 2026-04-20
+
+1. POST /api/live/streams/[id]/products
+   File: src/app/api/live/streams/[id]/products/route.ts
+   Bug: Foreign key constraint violation when streamId doesn't exist in DB
+   Fix: Added stream existence check before upsert; returns 404 if not found
+   Test: curl -X POST .../api/live/streams/nonexistent123/products -d '{"productId":"x"}' → 404
+
+2. POST /api/search/image
+   File: src/app/api/search/image/route.ts
+   Bug: request.formData() throws when Content-Type is not multipart/form-data
+   Fix: Wrapped formData() in try/catch, returns 400 on parse failure
+   Test: curl -X POST .../api/search/image → 400
+
+3. POST /api/tickets
+   File: src/app/api/tickets/route.ts
+   Bug: req.json() crashes on invalid JSON; missing field validation causes prisma error
+   Fix: Added try/catch for JSON parsing + validation for required fields (subject, category, body)
+   Test: curl -X POST .../api/tickets -d '{}' → 401 (unauth) / 400 (missing fields when authed)
+
+4. POST /api/upload
+   File: src/app/api/upload/route.ts
+   Bug: req.formData() throws when Content-Type is not multipart/form-data
+   Fix: Wrapped formData() in try/catch, returns 400 on parse failure
+   Test: curl -X POST .../api/upload → 400
+
+5. POST /api/webhooks/stripe
+   File: src/app/api/webhooks/stripe/route.ts
+   Bug: JSON.parse(body) throws on invalid/empty body in non-Stripe mode
+   Fix: Added empty body check, try/catch for JSON.parse, event.type validation; all return 400
+   Test: curl -X POST .../api/webhooks/stripe -d 'not-json' → 400
+
+All 5 endpoints no longer return 500 for error cases.

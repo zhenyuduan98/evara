@@ -1,0 +1,51 @@
+{
+  "header": {
+    "home": "首页",
+    "cart": "购物车",
+    "orders": "退货与订单",
+    "account": "账户与列表",
+    "search": "搜索亚马逊",
+    "sign_in": "登录",
+    "sign_out": "退出",
+    "deliver_to": "配送至",
+    "hello": "你好, {name}",
+    "all": "全部",
+    "view_cart": "查看购物车",
+    "shopping_cart": "购物车",
+    "items": "{count} 件商品",
+    "more_items": "还有 {count} 件商品",
+    "empty_cart": "购物车是空的"
+  },
+  "footer": {
+    "back_to_top": "回到顶部",
+    "careers": "招聘信息",
+    "about": "关于我们",
+    "terms": "使用条款",
+    "privacy": "隐私政策",
+    "help": "帮助",
+    "copyright": "© 2024 Evara. 保留所有权利。"
+  },
+  "product": {
+    "add_to_cart": "加入购物车",
+    "buy_now": "立即购买",
+    "reviews": "评论",
+    "in_stock": "有货",
+    "out_of_stock": "缺货",
+    "subscribe_save": "订阅并省钱"
+  },
+  "cart": {
+    "your_cart": "您的购物车",
+    "subtotal": "小计",
+    "checkout": "前往结账",
+    "empty_cart": "购物车是空的",
+    "remove": "删除",
+    "quantity": "数量"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "出了点问题",
+    "save": "保存",
+    "cancel": "取消",
+    "back": "返回"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "nav": { "home": "首页", "deals": "优惠", "cart": "购物车", "account": "账户", "orders": "订单", "search": "搜索" },
+  "common": { "save": "保存", "cancel": "取消", "delete": "删除", "edit": "编辑", "submit": "提交", "loading": "加载中...", "back": "返回" },
+  "footer": { "about": "关于我们", "careers": "招聘", "privacy": "隐私政策", "terms": "服务条款", "help": "帮助", "contact": "联系我们" }
+}

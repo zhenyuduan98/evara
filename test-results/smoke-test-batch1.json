@@ -1,0 +1,723 @@
+[
+  {
+    "endpoint": "/api/account",
+    "method": "GET",
+    "statusCode": 405,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/account",
+    "method": "PUT",
+    "statusCode": 405,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/account/change-password",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/account/connected-accounts",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/account/enable-2fa",
+    "method": "POST",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/account/prime/status",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/account/prime/subscribe",
+    "method": "POST",
+    "statusCode": 201,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/account/profile",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/account/profile",
+    "method": "PUT",
+    "statusCode": 400,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/account/sessions",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/account/sessions/test-session-id",
+    "method": "DELETE",
+    "statusCode": 404,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/account/store-credit",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/account/verify-2fa",
+    "method": "POST",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/account",
+    "method": "GET",
+    "statusCode": 405,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/addresses",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/addresses",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/addresses/fake-id/default",
+    "method": "PUT",
+    "statusCode": 404,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/ab-tests/test-id/results",
+    "method": "GET",
+    "statusCode": 404,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/analytics",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/analytics/cohorts",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/analytics/export",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/analytics/funnel",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/analytics/search",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/announcements",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/announcements",
+    "method": "POST",
+    "statusCode": 500,
+    "pass": false,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/announcements/fake-id",
+    "method": "GET",
+    "statusCode": 405,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/announcements/fake-id",
+    "method": "PUT",
+    "statusCode": 500,
+    "pass": false,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/announcements/fake-id",
+    "method": "DELETE",
+    "statusCode": 500,
+    "pass": false,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/audit-log",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/barcodes",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/business/fake-id/verify",
+    "method": "POST",
+    "statusCode": 404,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/campaigns",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/campaigns",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/commissions",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/commissions",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/coupons",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/coupons",
+    "method": "POST",
+    "statusCode": 500,
+    "pass": false,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/csat",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/disputes",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/disputes/fake-id",
+    "method": "GET",
+    "statusCode": 405,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/disputes/fake-id",
+    "method": "PUT",
+    "statusCode": 404,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/email-campaigns",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/email-campaigns",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/email-campaigns/fake-id/send",
+    "method": "POST",
+    "statusCode": 404,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/escalation-rules",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/escalation-rules",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/experiments",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/experiments",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/feature-flags",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/feature-flags",
+    "method": "POST",
+    "statusCode": 201,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/feature-flags/test-flag",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/feature-flags/test-flag",
+    "method": "PUT",
+    "statusCode": 405,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/feature-flags/test-flag",
+    "method": "DELETE",
+    "statusCode": 405,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/finance/ledger",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/inventory",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/inventory/bulk",
+    "method": "POST",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/maintenance",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/maintenance",
+    "method": "POST",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/notification-templates",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/notification-templates",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/orders",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/orders/export",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/orders/fake-id/fraud-review",
+    "method": "POST",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/products",
+    "method": "GET",
+    "statusCode": 405,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/products/fake-id",
+    "method": "GET",
+    "statusCode": 405,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/products/fake-id",
+    "method": "PUT",
+    "statusCode": 404,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/products/fake-id",
+    "method": "DELETE",
+    "statusCode": 404,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/queues",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/refunds",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/refunds/fake-id",
+    "method": "GET",
+    "statusCode": 405,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/refunds/fake-id/process",
+    "method": "POST",
+    "statusCode": 404,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/returns",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/reviews",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/reviews/fake-id/moderate",
+    "method": "POST",
+    "statusCode": 404,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/search/sync",
+    "method": "POST",
+    "statusCode": 500,
+    "pass": false,
+    "error": "{\"error\":\"Failed to sync products to Meilisearch\"}"
+  },
+  {
+    "endpoint": "/api/admin/sellers/fake-id/approve",
+    "method": "POST",
+    "statusCode": 500,
+    "pass": false,
+    "error": "{\"error\":\"Failed to approve seller\"}"
+  },
+  {
+    "endpoint": "/api/admin/sellers/fake-id/payout",
+    "method": "POST",
+    "statusCode": 404,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/sellers/fake-id/reject",
+    "method": "POST",
+    "statusCode": 500,
+    "pass": false,
+    "error": "{\"error\":\"Failed to reject seller\"}"
+  },
+  {
+    "endpoint": "/api/admin/sellers/fake-id/suspend",
+    "method": "POST",
+    "statusCode": 500,
+    "pass": false,
+    "error": "{\"error\":\"Failed to suspend seller\"}"
+  },
+  {
+    "endpoint": "/api/admin/shipments/fake-id/pack",
+    "method": "POST",
+    "statusCode": 500,
+    "pass": false,
+    "error": "{\"error\":\"\\nInvalid `prisma.shipment.update()` invocation:\\n\\n\\nAn operation failed because it depends on one or more records that were required but not found. Record to update not found.\"}"
+  },
+  {
+    "endpoint": "/api/admin/shipments/fake-id/ship",
+    "method": "POST",
+    "statusCode": 500,
+    "pass": false,
+    "error": "{\"error\":\"\\nInvalid `prisma.shipment.update()` invocation:\\n\\n\\nAn operation failed because it depends on one or more records that were required but not found. Record to update not found.\"}"
+  },
+  {
+    "endpoint": "/api/admin/shipments/batch-labels",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/store-credit",
+    "method": "GET",
+    "statusCode": 405,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/store-credit",
+    "method": "POST",
+    "statusCode": 201,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/system/cache-stats",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/system/health",
+    "method": "GET",
+    "statusCode": 503,
+    "pass": true,
+    "error": "Service degraded (503 with valid JSON - acceptable"
+  },
+  {
+    "endpoint": "/api/admin/system/metrics",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/tickets/fake-id/assign",
+    "method": "POST",
+    "statusCode": 500,
+    "pass": false,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/tickets/overdue",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/vine/invite",
+    "method": "POST",
+    "statusCode": 500,
+    "pass": false,
+    "error": ""
+  },
+  {
+    "endpoint": "/api/admin/vine/reviewers",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/warehouse/bins",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/warehouse/pick-list",
+    "method": "GET",
+    "statusCode": 400,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/warehouses",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/warehouses",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/warehouses/fake-id/pick-list",
+    "method": "GET",
+    "statusCode": 405,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/admin/analytics",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/ads/bid",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/ads/stats",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/ads/track",
+    "method": "POST",
+    "statusCode": 400,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/affiliate/test-code/click",
+    "method": "POST",
+    "statusCode": 404,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/affiliate/test-code/stats",
+    "method": "GET",
+    "statusCode": 404,
+    "pass": true,
+    "error": null
+  },
+  {
+    "endpoint": "/api/affiliate/stats",
+    "method": "GET",
+    "statusCode": 200,
+    "pass": true,
+    "error": null
+  }
+]

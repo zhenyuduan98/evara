@@ -1,0 +1,295 @@
+## GDD V3 — 103 Gaps Full Coverage
+## Total: 103 gaps across 11 domains + cross-cutting
+## Strategy: 12 batches × 3 parallel subagents = 36 goals
+
+batches:
+  # === CRITICAL INFRASTRUCTURE (Batches 1-2) ===
+  batch_1_infra_core:
+    parallel: true
+    goals:
+      G1_redis_meilisearch:
+        title: "Redis缓存 + Meilisearch搜索引擎接入"
+        covers: [11.3, 11.10, 2.1, 2.6, 9.6]
+        tasks:
+          - Install ioredis, connect to localhost:6379
+          - Create src/lib/redis.ts client with get/set/del/cache helpers
+          - Add Redis caching to product listings, search, categories
+          - Install meilisearch client, create src/lib/meilisearch.ts
+          - Sync products to Meilisearch index on create/update
+          - Replace Prisma LIKE search with Meilisearch (faceting, fuzzy, relevance)
+          - Migrate rate limiter from in-memory to Redis
+          - Update /api/health to check DB + Redis + Meilisearch connectivity
+        criteria: "Meilisearch search returns products with relevance scoring; Redis caches product pages; rate limiter uses Redis"
+
+      G2_job_queue:
+        title: "BullMQ任务队列 + 真实邮件发送"
+        covers: [11.4, 1.4, 1.3, 10.1]
+        tasks:
+          - Install bullmq
+          - Create src/lib/queue.ts with email/notification/inventory queues
+          - Create src/workers/ directory with queue processors
+          - Integrate Resend (free tier) or Nodemailer SMTP for real email
+          - Wire forgot-password, email-verify, order-confirm to email queue
+          - Add SMS placeholder via console (Twilio-ready interface)
+          - Create queue dashboard API /api/admin/queues
+        criteria: "Emails sent via queue; forgot-password sends real email; queue status visible in admin"
+
+      G3_env_ci:
+        title: "环境管理 + CI/CD + 监控 + 测试框架"
+        covers: [11.5, 11.6, 11.8, CC.9, CC.10]
+        tasks:
+          - Create .env.example with all required vars
+          - Create src/lib/env.ts with zod schema validation
+          - Create Dockerfile (multi-stage build)
+          - Create .github/workflows/ci.yml (lint + build + test)
+          - Install vitest, create vitest.config.ts
+          - Write 20+ unit tests covering critical APIs (auth, cart, checkout, orders)
+          - Add Sentry-like error boundary reporting (log to file if no DSN)
+          - Input validation with zod on all critical API routes (auth, checkout, orders)
+        criteria: "vitest runs 20+ tests passing; .env.example complete; Dockerfile builds; zod validates API inputs"
+
+  batch_2_payments:
+    parallel: true
+    goals:
+      G4_stripe_real:
+        title: "真实Stripe集成 - 退款/Connect/支付方式"
+        covers: [4.1, 4.2, 6.6, 3.9, 1.6]
+        tasks:
+          - Refund API calls real stripe.refunds.create() (with fallback to simulated)
+          - Payout API uses Stripe Connect transfers (with fallback)
+          - Checkout reuses saved PaymentMethod if selected
+          - Prime subscription creates real Stripe subscription (with fallback)
+          - Add Stripe webhook handlers for dispute/refund events
+          - Handle charge.dispute.created, charge.refunded webhooks
+        criteria: "Refund API attempts real Stripe call; saved payment methods selectable at checkout; webhook handles disputes"
+
+      G5_checkout_complete:
+        title: "完整结账流程 - 游客/优惠券/钱包/运费"
+        covers: [3.1, 3.7, 3.8, 3.6, 3.10, 3.2]
+        tasks:
+          - Guest checkout with session-based cart (no auth required)
+          - Apply coupon code at checkout with discount calculation
+          - Wallet balance as payment option (partial/full)
+          - Gift card balance applied at checkout
+          - Real shipping rate from /api/shipping/rates instead of hardcoded
+          - Order splitting by seller (multi-seller cart → multiple orders)
+        criteria: "Guest can checkout without login; coupon reduces total; wallet pays partial; orders split by seller"
+
+      G6_seller_kyc:
+        title: "商家KYC + 审批流 + 佣金 + API"
+        covers: [6.1, 6.5, 4.8, 6.4, 6.7, 6.2]
+        tasks:
+          - KYC document upload (ID, business license) to /api/seller/kyc
+          - Admin seller approval workflow (/api/admin/sellers/[id]/approve|reject)
+          - Configurable commission rates per category in DB
+          - Seller API with API key auth for external integrations
+          - Seller suspension enforcement (check on every seller API call)
+          - Multi-user seller accounts (invite team member with role)
+        criteria: "Seller uploads KYC docs; admin approves/rejects; commission rates configurable; API key auth works"
+
+  # === DOMAIN ENHANCEMENTS (Batches 3-6) ===
+  batch_3_user_product:
+    parallel: true
+    goals:
+      G7_user_auth_complete:
+        title: "用户认证完善 - MFA强制/恢复码/密码强度"
+        covers: [1.1, 1.2, 1.12, 1.8, 1.9, 1.5]
+        tasks:
+          - MFA check in NextAuth login callback (if 2FA enabled, require TOTP)
+          - Generate 10 recovery codes on 2FA enable, store hashed
+          - Password strength validation (min 8, upper+lower+number+special)
+          - Active sessions page with device info and revoke button
+          - Prime membership auto-renewal check (API route or middleware)
+          - Account deactivation cascade cleanup
+        criteria: "2FA-enabled users must enter TOTP at login; recovery codes work; weak passwords rejected"
+
+      G8_product_enhance:
+        title: "商品增强 - 对比/视频/库存预留/图片上传"
+        covers: [2.3, 2.4, 2.5, 2.8, 2.9, 2.10]
+        tasks:
+          - Product comparison page fetches real data, shows matrix table
+          - Add videoUrl field to Product, video player on detail page
+          - Inventory hold during checkout (15-min reservation)
+          - Review image upload via /api/upload integration
+          - CSV import validation (required fields, data types, error report)
+          - Dynamic SEO metadata on product detail pages (generateMetadata)
+        criteria: "Compare page shows real product matrix; video plays; inventory held during checkout"
+
+      G9_finance_complete:
+        title: "财务完善 - 会计账本/发票PDF/税务/信用/争议"
+        covers: [4.3, 4.4, 4.5, 4.6, 4.7]
+        tasks:
+          - Ledger model for double-entry accounting (debit/credit entries)
+          - Invoice PDF generation (html-to-pdf or template)
+          - Tax calculation using TaxRate DB table (not hardcoded 8%)
+          - Store credit issuance as refund alternative
+          - Dispute handling workflow (create/respond/resolve)
+        criteria: "Ledger tracks all financial movements; invoice downloads as PDF; tax uses DB rates"
+
+  batch_4_fulfillment_cs:
+    parallel: true
+    goals:
+      G10_fulfillment_enhance:
+        title: "履约增强 - 载体API/批量发货/配送窗口/退货标签"
+        covers: [5.1, 5.2, 5.4, 5.5, 5.7, 5.3]
+        tasks:
+          - Carrier rate API abstraction layer (mock but realistic response format)
+          - Tracking webhook receiver for carrier status updates
+          - Batch shipping label generation (select multiple, generate labels)
+          - Delivery window selection at checkout (standard/express/same-day)
+          - Real return label generation with carrier info
+          - Bin location management CRUD and pick optimization
+        criteria: "Carrier API returns structured rates; batch labels work; delivery windows selectable"
+
+      G11_cs_enhance:
+        title: "客服增强 - WebSocket聊天/工单升级/知识库分类/CSAT"
+        covers: [8.1, 8.4, 8.5, 8.6, 8.7, 8.2]
+        tasks:
+          - Upgrade chat from SSE to Server-Sent Events with better reconnection (or basic WS)
+          - Auto-escalation rule engine (ticket age > SLA → escalate)
+          - Knowledge base categories and article hierarchy
+          - Auto-assignment (round-robin) when ticket created
+          - CSAT aggregate dashboard for admin
+          - Simple AI chatbot (keyword-match FAQ, then handoff to human)
+        criteria: "Chat reconnects reliably; tickets auto-escalate past SLA; KB has categories; CSAT dashboard shows scores"
+
+      G12_marketing_enhance:
+        title: "营销增强 - 促销叠加/邮件营销/忠诚度分层/闪购实时"
+        covers: [7.1, 7.2, 7.3, 7.4, 7.5, 7.6]
+        tasks:
+          - Promotion stacking rules (max 1 coupon + 1 deal, configurable)
+          - Email campaign send (batch to subscriber list via queue)
+          - Loyalty tier system (Bronze/Silver/Gold/Platinum with point thresholds)
+          - Flash sale real-time stock via SSE endpoint
+          - Affiliate click tracking pixel and conversion attribution
+          - Ad auction improvements (daily budget enforcement, impression counting)
+        criteria: "Promotion rules prevent invalid stacking; loyalty tiers grant benefits; flash sale shows real-time stock"
+
+  # === DATA & COMMS (Batch 5) ===
+  batch_5_data_comms:
+    parallel: true
+    goals:
+      G13_data_intelligence:
+        title: "数据智能 - 图表/队列分析/导出/CAPTCHA/欺诈自动化"
+        covers: [9.1, 9.2, 9.3, 9.4, 9.7, 9.8, 9.9]
+        tasks:
+          - Install recharts, add charts to admin analytics dashboard
+          - Cohort retention analysis API + visualization
+          - CSV export for analytics data
+          - Add simple CAPTCHA (math or custom) to registration and login
+          - Automated fraud scoring algorithm (order amount, velocity, address mismatch)
+          - A/B test results with conversion rate + confidence interval
+          - Funnel visualization with recharts on admin dashboard
+        criteria: "Admin analytics shows real charts; CAPTCHA on auth forms; fraud auto-scores orders"
+
+      G14_comms_enhance:
+        title: "通信增强 - Web Push/多语言模板/通知聚合/邮件追踪"
+        covers: [10.4, 10.5, 10.6, 10.2, 10.3]
+        tasks:
+          - Web Push with VAPID keys and Service Worker
+          - Multi-language notification templates (use locale field)
+          - Notification digest (daily summary email)
+          - Email open/click tracking (tracking pixel + redirect links)
+          - Batch notification sending for campaigns
+        criteria: "Browser push notifications work; templates support multiple locales; digest emails sent daily"
+
+      G15_transactions_extra:
+        title: "交易补充 - 分期/数字商品/订单导出/修改"
+        covers: [3.3, 3.4, 3.5]
+        tasks:
+          - Installment payment option at checkout (3/6/12 months display)
+          - Digital goods delivery (download link generation post-purchase)
+          - Order history CSV/PDF export
+        criteria: "Installment option shown; digital goods deliver download link; orders exportable"
+
+  # === CROSS-CUTTING UX (Batches 6-8) ===
+  batch_6_seo_a11y:
+    parallel: true
+    goals:
+      G16_seo_sitemap:
+        title: "SEO全面优化 + Sitemap + OpenGraph"
+        covers: [CC.5, 11.9]
+        tasks:
+          - generateMetadata on ALL public pages (products, categories, brands, deals)
+          - Create src/app/sitemap.ts (dynamic sitemap from products/categories/help)
+          - OpenGraph images for product pages
+          - Structured data (JSON-LD) for products and reviews
+          - Canonical URLs on all pages
+        criteria: "Every public page has title+description+OG; sitemap.xml serves all product URLs; JSON-LD on products"
+
+      G17_a11y_darkmode:
+        title: "无障碍 + 暗黑模式 + 响应式"
+        covers: [CC.1, CC.2, CC.6]
+        tasks:
+          - Add dark mode via Tailwind dark: classes on all layout components
+          - Dark mode toggle in header (persisted to localStorage)
+          - ARIA labels on all interactive elements (buttons, links, forms)
+          - Keyboard navigation for dropdown menus and modals
+          - Mobile responsive audit and fixes on top 10 pages
+          - Skip-to-content link
+        criteria: "Dark mode toggleable; all buttons have ARIA labels; pages work on mobile viewport"
+
+      G18_loading_images:
+        title: "加载态/骨架屏 + 图片优化 + 代码分割"
+        covers: [CC.3, CC.4, CC.7, CC.8]
+        tasks:
+          - Create SkeletonCard, SkeletonTable, SkeletonDetail components
+          - Add loading.tsx files for major route groups
+          - Replace all <img> with next/image
+          - Configure next.config.js image domains
+          - Add dynamic() imports for heavy components (charts, editors)
+          - Standardize error handling across APIs (consistent errorResponse)
+        criteria: "Skeleton screens show during loading; all images use next/image; heavy components lazy loaded"
+
+  # === REMAINING FEATURES (Batches 7-8) ===
+  batch_7_misc_1:
+    parallel: true
+    goals:
+      G19_seller_storefront:
+        title: "商家店铺定制 + 商品视频 + 品牌页增强"
+        covers: [6.3, 1.10, 1.11, 2.4]
+        tasks:
+          - Seller storefront customization (banner, description, featured products)
+          - Phone number verification flow (store + verify OTP)
+          - Branded seller page with custom layout
+        criteria: "Sellers can customize their storefront; phone verification works"
+
+      G20_advanced_features:
+        title: "高级功能 - 页面构建/Banner管理/API版本"
+        covers: [11.1, 11.2, 11.7, 11.11, 11.12]
+        tasks:
+          - Content page builder (admin creates pages from block templates)
+          - Banner scheduled publishing (startDate/endDate on ContentBlock)
+          - API route prefix /api/v1 alias
+          - Enhanced health check (DB+Redis+Meilisearch status)
+          - Upgrade logger to structured format with log levels
+        criteria: "Admin can create content pages; banners schedule; health check shows all services"
+
+      G21_platform_polish:
+        title: "平台打磨 - FBA概念/聊天机器人/电话回拨/数据留存"
+        covers: [5.6, 8.2, 8.3, 9.5]
+        tasks:
+          - FBA concept (sellers assign inventory to platform warehouses)
+          - Enhanced chatbot with more FAQ patterns
+          - Phone callback request form
+          - Bot detection middleware (user-agent + rate patterns)
+        criteria: "FBA inventory assignment works; chatbot handles top 10 FAQs; bot detection blocks suspicious traffic"
+
+  batch_8_final:
+    parallel: true
+    goals:
+      G22_remaining_medium:
+        title: "剩余MEDIUM功能收尾"
+        covers: [5.8, 7.7, 9.2, 3.3]
+        tasks:
+          - Pick path optimization (sort by bin location)
+          - Push notification for deal alerts
+          - Cohort analysis visualization
+          - Installment display improvements
+        criteria: "Pick lists sorted by location; deal push notifications sent"
+
+summary:
+  total_gaps: 103
+  total_goals: 22
+  total_batches: 8
+  strategy: "CRITICAL infra first → domain completeness → cross-cutting UX → polish"

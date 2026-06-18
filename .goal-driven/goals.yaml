@@ -1,0 +1,473 @@
+project:
+  name: "Amazon Clone"
+  description: "A full-featured e-commerce platform inspired by Amazon.com, built with Next.js + TypeScript + PostgreSQL"
+  tech_stack:
+    frontend: "Next.js 14 (App Router), React, TailwindCSS, Zustand"
+    backend: "Next.js API Routes + tRPC"
+    database: "PostgreSQL + Prisma ORM"
+    auth: "NextAuth.js"
+    search: "Meilisearch"
+    payments: "Stripe"
+    storage: "S3-compatible (MinIO for dev)"
+    cache: "Redis"
+    deployment: "Docker Compose"
+
+# ============================================================
+# PHASE 1: Foundation (Goals 1.x)
+# ============================================================
+goals:
+  - id: "1"
+    title: "Project Foundation & Infrastructure"
+    description: "Set up the monorepo, core dependencies, database, and CI pipeline"
+    sub_goals:
+
+      - id: "1.1"
+        title: "Project Initialization"
+        description: "Next.js 14 App Router project with TypeScript, TailwindCSS, ESLint, Prettier"
+        criteria:
+          - "Next.js 14 app created with App Router (app/ directory)"
+          - "TypeScript strict mode enabled"
+          - "TailwindCSS configured with base theme (Amazon-like color palette)"
+          - "ESLint + Prettier configured and passing"
+          - "npm run dev starts the app on localhost:3000"
+          - "Basic layout with header/footer placeholder renders"
+
+      - id: "1.2"
+        title: "Database & ORM Setup"
+        description: "PostgreSQL with Prisma ORM, initial schema, migrations"
+        dependencies: ["1.1"]
+        criteria:
+          - "Docker Compose with PostgreSQL 16 + Redis containers"
+          - "Prisma ORM installed and configured"
+          - "Initial schema: User, Account, Session tables"
+          - "prisma migrate dev runs successfully"
+          - "prisma studio opens and shows tables"
+          - "Seed script creates test data"
+
+      - id: "1.3"
+        title: "Authentication System"
+        description: "NextAuth.js with email/password + OAuth (Google)"
+        dependencies: ["1.2"]
+        criteria:
+          - "NextAuth.js configured with Prisma adapter"
+          - "Email/password registration with bcrypt hashing"
+          - "Email/password login with session creation"
+          - "Google OAuth login works"
+          - "Protected API routes return 401 for unauthenticated users"
+          - "Session persists across page refreshes"
+          - "/auth/signin and /auth/signup pages render correctly"
+          - "Logout clears session"
+
+      - id: "1.4"
+        title: "Base UI Component Library"
+        description: "Reusable UI components: Button, Input, Card, Modal, Toast, etc."
+        dependencies: ["1.1"]
+        criteria:
+          - "Button component with variants (primary, secondary, outline, ghost, danger)"
+          - "Input component with label, error state, icons"
+          - "Card component with image, title, body slots"
+          - "Modal component with backdrop, close button, animations"
+          - "Toast/notification system (success, error, warning, info)"
+          - "Dropdown/Select component"
+          - "Badge component"
+          - "Rating stars component (1-5, half stars)"
+          - "All components have TypeScript props interfaces"
+          - "Responsive on mobile/tablet/desktop"
+
+      - id: "1.5"
+        title: "Main Layout & Navigation"
+        description: "Amazon-style header, nav bar, footer, search bar"
+        dependencies: ["1.3", "1.4"]
+        criteria:
+          - "Top header with logo, search bar, account dropdown, cart icon with count"
+          - "Category navigation bar below header"
+          - "Footer with link columns (About, Help, Sell, etc.)"
+          - "Mobile hamburger menu"
+          - "Search bar with placeholder text and submit"
+          - "Account dropdown shows login/register when logged out, profile/orders when logged in"
+          - "Cart icon shows item count badge"
+          - "Sticky header on scroll"
+
+# ============================================================
+# PHASE 2: Product Catalog (Goals 2.x)
+# ============================================================
+  - id: "2"
+    title: "Product Catalog System"
+    description: "Product data model, CRUD, categories, images, and browsing"
+    dependencies: ["1"]
+    sub_goals:
+
+      - id: "2.1"
+        title: "Product Data Model"
+        description: "Prisma schema for products, categories, variants, images"
+        dependencies: ["1.2"]
+        criteria:
+          - "Category model with parent-child hierarchy (nested categories)"
+          - "Product model with: title, description, brand, price, compareAtPrice, sku, status"
+          - "ProductVariant model: size, color, stock, price override"
+          - "ProductImage model: url, alt, position, variant association"
+          - "Product-Category many-to-many relationship"
+          - "Product has averageRating and reviewCount fields"
+          - "Migrations run cleanly"
+          - "Seed script creates 50+ products across 10+ categories"
+
+      - id: "2.2"
+        title: "Product API (CRUD)"
+        description: "API routes for product management"
+        dependencies: ["2.1"]
+        criteria:
+          - "GET /api/products - list with pagination (cursor-based)"
+          - "GET /api/products/[id] - single product with variants, images, category"
+          - "GET /api/products?category=X - filter by category"
+          - "GET /api/products?q=search - basic text search"
+          - "GET /api/products?sort=price_asc|price_desc|rating|newest"
+          - "GET /api/products?minPrice=X&maxPrice=Y - price filter"
+          - "POST /api/admin/products - create (admin only)"
+          - "PUT /api/admin/products/[id] - update (admin only)"
+          - "DELETE /api/admin/products/[id] - soft delete (admin only)"
+          - "All endpoints return proper error codes"
+
+      - id: "2.3"
+        title: "Product Listing Page"
+        description: "Category/search results page with filters and sorting"
+        dependencies: ["2.2", "1.5"]
+        criteria:
+          - "Grid/list view toggle"
+          - "Product cards show: image, title, price, rating stars, Prime badge"
+          - "Left sidebar with filters: category tree, price range slider, rating, brand"
+          - "Sort dropdown: Featured, Price Low-High, Price High-Low, Avg Rating, Newest"
+          - "Pagination or infinite scroll"
+          - "Breadcrumb navigation for categories"
+          - "Result count display ('1-24 of 1,000+ results')"
+          - "Responsive: 4 cols desktop, 2 cols tablet, 1 col mobile"
+
+      - id: "2.4"
+        title: "Product Detail Page"
+        description: "Full product page with images, details, variants, add-to-cart"
+        dependencies: ["2.2", "1.5"]
+        criteria:
+          - "Image gallery with thumbnails and main image zoom/lightbox"
+          - "Product title, brand, rating with review count"
+          - "Price display with discount/savings if compareAtPrice exists"
+          - "Variant selector (color swatches, size dropdown)"
+          - "Quantity selector"
+          - "Add to Cart button (prominent, Amazon-orange)"
+          - "Buy Now button"
+          - "Stock status indicator (In Stock / Only X left / Out of Stock)"
+          - "Product description with bullet points"
+          - "Technical specifications table"
+          - "Breadcrumb navigation"
+
+# ============================================================
+# PHASE 3: Shopping Cart & Checkout (Goals 3.x)
+# ============================================================
+  - id: "3"
+    title: "Shopping Cart & Checkout"
+    description: "Cart management, checkout flow, address management"
+    dependencies: ["2"]
+    sub_goals:
+
+      - id: "3.1"
+        title: "Shopping Cart System"
+        description: "Add/remove/update cart items, persist cart"
+        dependencies: ["2.2"]
+        criteria:
+          - "Cart stored in DB for logged-in users, localStorage for guests"
+          - "Add to cart with variant and quantity"
+          - "Update quantity in cart"
+          - "Remove item from cart"
+          - "Cart merges on login (guest cart + user cart)"
+          - "Cart page shows items, quantities, subtotal per item, grand total"
+          - "Cart icon in header updates count in real-time"
+          - "Stock validation on add (can't add more than available)"
+          - "Save for Later functionality"
+
+      - id: "3.2"
+        title: "Address Management"
+        description: "User address book for shipping"
+        dependencies: ["1.3"]
+        criteria:
+          - "Address model: name, line1, line2, city, state, zip, country, phone, isDefault"
+          - "CRUD API for addresses"
+          - "Address book page in user account"
+          - "Add/edit address form with validation"
+          - "Set default address"
+          - "Delete address"
+          - "Address selector component for checkout"
+
+      - id: "3.3"
+        title: "Checkout Flow"
+        description: "Multi-step checkout: address → shipping → payment → review → place order"
+        dependencies: ["3.1", "3.2"]
+        criteria:
+          - "Step 1: Select/add shipping address"
+          - "Step 2: Select shipping method (Standard/Express/Next-day) with costs"
+          - "Step 3: Payment method (Stripe card input)"
+          - "Step 4: Order review with all details"
+          - "Place Order button creates order and processes payment"
+          - "Order confirmation page with order number"
+          - "Confirmation email sent"
+          - "Cart cleared after successful order"
+          - "Stock decremented on order placement"
+          - "Redirect to login if not authenticated"
+
+# ============================================================
+# PHASE 4: Payment & Orders (Goals 4.x)
+# ============================================================
+  - id: "4"
+    title: "Payment & Order Management"
+    description: "Stripe integration, order lifecycle, order history"
+    dependencies: ["3"]
+    sub_goals:
+
+      - id: "4.1"
+        title: "Stripe Payment Integration"
+        description: "Payment processing with Stripe"
+        dependencies: ["3.3"]
+        criteria:
+          - "Stripe SDK integrated (server + client)"
+          - "Create PaymentIntent on checkout"
+          - "Stripe Elements card input in checkout"
+          - "Handle successful payment → order confirmed"
+          - "Handle failed payment → show error, allow retry"
+          - "Webhook endpoint for payment events (payment_intent.succeeded, failed)"
+          - "Refund API for admin"
+          - "Payment records stored in DB linked to orders"
+
+      - id: "4.2"
+        title: "Order System"
+        description: "Order model, status tracking, order history"
+        dependencies: ["4.1"]
+        criteria:
+          - "Order model: items, quantities, prices, shipping address, payment, status, timestamps"
+          - "OrderItem model linked to products"
+          - "Order status enum: PENDING, CONFIRMED, PROCESSING, SHIPPED, DELIVERED, CANCELLED, REFUNDED"
+          - "Order status transitions with validation"
+          - "GET /api/orders - user's order history with pagination"
+          - "GET /api/orders/[id] - order detail"
+          - "POST /api/orders/[id]/cancel - cancel order (if PENDING/CONFIRMED)"
+          - "Admin: list all orders, update status, filter by status"
+
+      - id: "4.3"
+        title: "Order History & Tracking UI"
+        description: "User-facing order pages"
+        dependencies: ["4.2"]
+        criteria:
+          - "My Orders page with list of past orders"
+          - "Order detail page: items, prices, shipping address, payment info, status"
+          - "Order status timeline/progress bar"
+          - "Reorder button (add all items to cart)"
+          - "Cancel order button (when applicable)"
+          - "Order search/filter by date range, status"
+
+# ============================================================
+# PHASE 5: Reviews & Ratings (Goals 5.x)
+# ============================================================
+  - id: "5"
+    title: "Reviews & Ratings System"
+    description: "Product reviews, ratings, helpful votes"
+    dependencies: ["4"]
+    sub_goals:
+
+      - id: "5.1"
+        title: "Review System"
+        description: "Write, read, vote on reviews"
+        dependencies: ["2.1", "4.2"]
+        criteria:
+          - "Review model: user, product, rating(1-5), title, body, images, verified_purchase, helpful_count"
+          - "Only users who purchased can leave verified reviews"
+          - "One review per user per product"
+          - "Star rating distribution bar chart on product page"
+          - "Review list with sort (newest, highest, lowest, most helpful)"
+          - "Helpful/Not Helpful vote buttons"
+          - "Review images upload"
+          - "Average rating updates on product when review added/modified"
+          - "Pagination for reviews"
+
+# ============================================================
+# PHASE 6: Search (Goals 6.x)
+# ============================================================
+  - id: "6"
+    title: "Search System"
+    description: "Full-text search with Meilisearch"
+    dependencies: ["2"]
+    sub_goals:
+
+      - id: "6.1"
+        title: "Search Engine Integration"
+        description: "Meilisearch setup, indexing, search API"
+        dependencies: ["2.1"]
+        criteria:
+          - "Meilisearch container in Docker Compose"
+          - "Product index with searchable fields: title, description, brand, category"
+          - "Filterable fields: price, rating, category, brand"
+          - "Sortable fields: price, rating, createdAt"
+          - "Auto-sync: product creates/updates/deletes sync to search index"
+          - "Search API returns results with facets"
+          - "Typo tolerance working"
+          - "Search completes in < 50ms"
+
+      - id: "6.2"
+        title: "Search UI"
+        description: "Search bar with suggestions, results page"
+        dependencies: ["6.1", "2.3"]
+        criteria:
+          - "Search bar autocomplete/suggestions as user types (debounced)"
+          - "Search results page reuses product listing with search query"
+          - "Faceted filters from Meilisearch (brand, category, price ranges)"
+          - "Search highlighting in results"
+          - "Recent searches stored locally"
+          - "'No results' state with suggestions"
+
+# ============================================================
+# PHASE 7: Seller System (Goals 7.x)
+# ============================================================
+  - id: "7"
+    title: "Seller/Marketplace System"
+    description: "Multi-vendor marketplace with seller dashboard"
+    dependencies: ["4"]
+    sub_goals:
+
+      - id: "7.1"
+        title: "Seller Model & Registration"
+        description: "Seller accounts, registration flow"
+        dependencies: ["1.3"]
+        criteria:
+          - "Seller model: companyName, description, logo, rating, status(PENDING/APPROVED/SUSPENDED)"
+          - "Seller registration form"
+          - "Admin approval workflow"
+          - "Seller linked to User account"
+          - "Products linked to Seller"
+
+      - id: "7.2"
+        title: "Seller Dashboard"
+        description: "Product management, order management, analytics for sellers"
+        dependencies: ["7.1", "4.2"]
+        criteria:
+          - "Seller dashboard home with sales summary (today/week/month)"
+          - "Product management: CRUD products, manage inventory"
+          - "Order management: view orders for seller's products, update fulfillment status"
+          - "Revenue reports and charts"
+          - "Seller profile settings"
+
+# ============================================================
+# PHASE 8: Promotions & Marketing (Goals 8.x)
+# ============================================================
+  - id: "8"
+    title: "Promotions & Marketing"
+    description: "Coupons, deals, promotional features"
+    dependencies: ["3"]
+    sub_goals:
+
+      - id: "8.1"
+        title: "Coupon System"
+        description: "Create and apply discount coupons"
+        dependencies: ["3.3"]
+        criteria:
+          - "Coupon model: code, type(PERCENTAGE/FIXED), value, minOrderAmount, maxUses, expiresAt"
+          - "Apply coupon in checkout"
+          - "Validate coupon (not expired, not exceeded uses, meets minimum)"
+          - "Display discount in order summary"
+          - "Admin CRUD for coupons"
+          - "One coupon per order"
+
+      - id: "8.2"
+        title: "Deals & Featured Products"
+        description: "Deal of the Day, featured sections on homepage"
+        dependencies: ["2.3"]
+        criteria:
+          - "Homepage hero carousel/banner"
+          - "Deal of the Day section with countdown timer"
+          - "Featured products section"
+          - "Category showcase sections"
+          - "Recently viewed products"
+          - "Admin can set deals and featured products"
+
+# ============================================================
+# PHASE 9: Notifications (Goals 9.x)
+# ============================================================
+  - id: "9"
+    title: "Notification System"
+    description: "Email notifications for key events"
+    dependencies: ["4"]
+    sub_goals:
+
+      - id: "9.1"
+        title: "Email Notifications"
+        description: "Transactional emails for orders, auth, etc."
+        dependencies: ["4.2", "1.3"]
+        criteria:
+          - "Email service abstraction (Resend/SendGrid or SMTP)"
+          - "Welcome email on registration"
+          - "Order confirmation email with details"
+          - "Shipping confirmation email"
+          - "Password reset email"
+          - "HTML email templates (responsive)"
+          - "Email queue with retry logic"
+
+# ============================================================
+# PHASE 10: Admin Panel (Goals 10.x)
+# ============================================================
+  - id: "10"
+    title: "Admin Dashboard"
+    description: "Admin panel for platform management"
+    dependencies: ["7"]
+    sub_goals:
+
+      - id: "10.1"
+        title: "Admin Dashboard & Management"
+        description: "Admin UI for managing the platform"
+        dependencies: ["4.2", "7.1"]
+        criteria:
+          - "Admin role check middleware"
+          - "Dashboard home: total orders, revenue, users, products charts"
+          - "User management: list, view, ban/unban"
+          - "Product management: list, approve, reject, edit"
+          - "Order management: list, view, update status, refund"
+          - "Seller management: approve/reject applications"
+          - "Coupon management"
+          - "Category management with drag-and-drop tree"
+          - "Admin-only route protection"
+
+# ============================================================
+# PHASE 11: Performance & Polish (Goals 11.x)
+# ============================================================
+  - id: "11"
+    title: "Performance, SEO & Polish"
+    description: "Optimization, SEO, accessibility, final polish"
+    dependencies: ["10"]
+    sub_goals:
+
+      - id: "11.1"
+        title: "Performance Optimization"
+        dependencies: ["10.1"]
+        criteria:
+          - "Image optimization with next/image and WebP"
+          - "API response caching with Redis"
+          - "Database query optimization (indexes, eager loading)"
+          - "Lighthouse performance score > 90"
+          - "Code splitting and lazy loading"
+          - "Static generation for product pages (ISR)"
+
+      - id: "11.2"
+        title: "SEO & Accessibility"
+        dependencies: ["10.1"]
+        criteria:
+          - "Meta tags, Open Graph, Twitter cards for all pages"
+          - "Structured data (JSON-LD) for products"
+          - "Sitemap.xml generation"
+          - "robots.txt"
+          - "ARIA labels on interactive elements"
+          - "Keyboard navigation works"
+          - "Lighthouse accessibility score > 90"
+
+      - id: "11.3"
+        title: "Docker & Deployment"
+        dependencies: ["11.1", "11.2"]
+        criteria:
+          - "Production Dockerfile with multi-stage build"
+          - "Docker Compose for full stack (app, postgres, redis, meilisearch)"
+          - "Environment variable configuration"
+          - "Health check endpoints"
+          - "docker compose up starts the entire platform"
+          - "README with setup instructions"

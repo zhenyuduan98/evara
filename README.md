@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 Evara - 全栈电商平台
 
-## Getting Started
+一个功能完整的现代电商平台，基于 Next.js 14 全栈开发。
 
-First, run the development server:
+## ✨ 功能特性
+
+### 🛍️ 用户端
+- 商品浏览、搜索、分类筛选
+- 图片搜索 & 条形码搜索
+- 购物车 & 愿望清单
+- 订单管理 & 订单追踪
+- 用户评价 & 评分系统
+- 多语言支持 (中/英/日/法/西)
+- 多币种切换
+- 深色模式
+- 推送通知
+
+### 🏪 卖家端
+- 卖家仪表盘
+- 商品管理 (CRUD / 批量上传)
+- 订单管理
+- 联盟营销
+
+### 🔧 管理后台
+- CMS 内容管理
+- 营销活动管理
+- 用户管理
+- 公告系统
+
+### 💳 其他
+- NextAuth.js 身份认证 (支持 2FA)
+- Prisma ORM + PostgreSQL
+- 会员体系
+- 订阅功能
+- 发票生成
+- SEO 优化 (JSON-LD 结构化数据)
+- 响应式设计
+
+## 🛠️ 技术栈
+
+| 层级 | 技术 |
+|------|------|
+| 框架 | Next.js 14 (App Router) |
+| 语言 | TypeScript |
+| 样式 | Tailwind CSS |
+| 数据库 | PostgreSQL + Prisma ORM |
+| 认证 | NextAuth.js |
+| 部署 | Node.js / PM2 |
+
+## 🚀 快速开始
+
+### 环境要求
+- Node.js 18+
+- PostgreSQL
+- npm / yarn / pnpm
+
+### 安装步骤
 
 ```bash
+# 克隆项目
+git clone https://github.com/zhenyuduan98/evara.git
+cd evara
+
+# 安装依赖
+npm install
+
+# 配置环境变量
+cp .env.example .env
+# 编辑 .env 填入数据库连接等配置
+
+# 初始化数据库
+npx prisma migrate dev
+
+# 填充示例数据
+npx tsx seed-products.ts
+
+# 启动开发服务器
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+访问 http://localhost:3000 即可预览。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 项目结构
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/                # Next.js App Router 页面
+│   ├── admin/         # 管理后台
+│   ├── seller/        # 卖家中心
+│   ├── products/      # 商品页面
+│   ├── cart/          # 购物车
+│   ├── account/       # 用户中心
+│   └── api/           # API 路由
+├── components/        # 可复用组件
+│   ├── layout/       # 布局组件 (Header/Footer)
+│   ├── home/         # 首页组件
+│   ├── products/     # 商品相关组件
+│   ├── search/       # 搜索组件
+│   └── reviews/      # 评价组件
+├── lib/              # 工具库
+└── providers/        # Context Providers
+```
 
-## Learn More
+## 📄 许可证
 
-To learn more about Next.js, take a look at the following resources:
+MIT License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 👤 作者
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[@zhenyuduan98](https://github.com/zhenyuduan98)

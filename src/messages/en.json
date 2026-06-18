@@ -1,0 +1,5 @@
+{
+  "nav": { "home": "Home", "deals": "Deals", "cart": "Cart", "account": "Account", "orders": "Orders", "search": "Search" },
+  "common": { "save": "Save", "cancel": "Cancel", "delete": "Delete", "edit": "Edit", "submit": "Submit", "loading": "Loading...", "back": "Back" },
+  "footer": { "about": "About Us", "careers": "Careers", "privacy": "Privacy Policy", "terms": "Terms of Service", "help": "Help", "contact": "Contact Us" }
+}
